@@ -29,5 +29,6 @@ Route::group(['middleware' => 'api'], function($router){
     Route::post('me', [AuthController::class,'me']);
     
     Route::resource('companies',CompaniesController::class)->except('create','edit');
+    Route::resource('schedules',SchedulesController::class)->except('create','edit');
 
 });
