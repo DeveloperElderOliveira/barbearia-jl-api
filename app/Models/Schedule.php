@@ -49,7 +49,7 @@ class Schedule extends Model
 
 	public function employee()
 	{
-		return $this->belongsTo(Employee::class, 'service_id');
+		return $this->belongsTo(Employee::class);
 	}
 
 	public function user()
