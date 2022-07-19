@@ -22,8 +22,9 @@ class SchedulesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        if(!$schedules = $this->schedule->all())
+    {   
+        $user = auth('api')->user();
+        if(!$schedules = $this->schedule->with('employee','service')->where('user_id',$user->id)->orderBy('scheduling_date')->get());
              return response()->json(['error' => 'schedules not found.'],401);
 
         return response()->json($schedules);
