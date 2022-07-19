@@ -24,7 +24,7 @@ class SchedulesController extends Controller
     public function index()
     {       
         $user = auth('api')->user();
-        dd($this->schedule->with('service')->where('user_id',$user['id'])->orderBy('scheduling_date')->get());
+        dd($this->schedule->with('employee','service')->where('user_id',$user['id'])->orderBy('scheduling_date')->get());
         if(!$schedules = $this->schedule->with('employee','service')->where('user_id',$user['id'])->orderBy('scheduling_date')->get());
              return response()->json(['error' => 'schedules not found.'],401);
 
