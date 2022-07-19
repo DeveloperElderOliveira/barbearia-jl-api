@@ -26,7 +26,7 @@ class SchedulesController extends Controller
         if(!$schedules = $this->schedule->all())
              return response()->json(['error' => 'schedules not found.'],401);
 
-        return response()->json([$schedules]);
+        return response()->json($schedules);
     } 
 
     /**
