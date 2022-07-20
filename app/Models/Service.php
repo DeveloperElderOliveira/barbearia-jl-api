@@ -38,6 +38,11 @@ class Service extends Model
 		'employee_id'
 	];
 
+	protected $hidden = [
+		'created_at',
+		'updated_at'
+	];
+
 	public function employee()
 	{
 		return $this->belongsTo(Employee::class);

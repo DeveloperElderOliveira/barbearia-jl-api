@@ -47,6 +47,11 @@ class Schedule extends Model
 		'service_id'
 	];
 
+	protected $hidden = [
+		'created_at',
+		'updated_at'
+	];
+
 	public function employee()
 	{
 		return $this->belongsTo(Employee::class);
