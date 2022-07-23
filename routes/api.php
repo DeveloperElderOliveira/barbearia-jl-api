@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'api'], function($router){
 
     Route::get('/', function () {
-        return response()->json(['message'=>'Barbearia JL API','status' => 'Connected']);
+        return response()->json(['message'=>'Api barbearia JL','status' => 'Connected']);
     });
     
     //Auth

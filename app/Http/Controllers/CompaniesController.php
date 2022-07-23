@@ -26,7 +26,7 @@ class CompaniesController extends Controller
         if(!$companies = $this->company->with('employees')->get())
              return response()->json(['error' => 'companies not found.'],401);
 
-        return response()->json(['companies' => $companies]);
+        return response()->json($companies);
     }  
 
     /**
