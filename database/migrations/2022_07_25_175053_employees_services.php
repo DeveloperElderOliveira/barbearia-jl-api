@@ -28,8 +28,9 @@ return new class extends Migration
                     ->references('id')
                     ->on('services')
                     ->onDelete('cascade');
-        }
+        });
     }
+    
 
     /**
      * Reverse the migrations.
