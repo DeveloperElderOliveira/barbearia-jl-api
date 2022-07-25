@@ -28,7 +28,8 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
 	protected $table = 'services';
-
+	public $timestamps = false;
+	
 	protected $casts = [
 		'price' => 'float',
 		'company_id' => 'int'

@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
 	protected $table = 'employees';
+	public $timestamps = false;
 
 	protected $casts = [
 		'user_id' => 'int',
@@ -64,6 +65,6 @@ class Employee extends Model
 
 	public function schedules()
 	{
-		return $this->hasMany(Schedule::class, 'employee_id');
+		return $this->hasMany(Schedule::class);
 	}
 }

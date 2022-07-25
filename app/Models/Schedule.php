@@ -28,7 +28,8 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
 	protected $table = 'schedules';
-
+	public $timestamps = false;
+	
 	protected $casts = [
 		'user_id' => 'int',
 		'employee_id' => 'int',
