@@ -48,8 +48,7 @@ class Service extends Model
 
 	public function employees()
 	{
-		return $this->belongsToMany(Employee::class, 'employees_services')
-					->withTimestamps();
+		return $this->belongsToMany(Employee::class, 'employees_services');
 	}
 
 	public function schedules()
