@@ -52,8 +52,14 @@ class Schedule extends Model
 		return $this->belongsTo(Employee::class, 'service_id');
 	}
 
+	public function service()
+	{
+		return $this->belongsTo(Service::class);
+	}
+
 	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}
+
 }
