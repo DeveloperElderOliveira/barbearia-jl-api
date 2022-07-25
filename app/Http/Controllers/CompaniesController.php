@@ -23,7 +23,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        if(!$companies = $this->company->with('employees')->get())
+        if(!$companies = $this->company->with('employees.services')->get())
              return response()->json(['error' => 'companies not found.'],401);
 
         return response()->json($companies);
