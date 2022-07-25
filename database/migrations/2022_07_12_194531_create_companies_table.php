@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone', 45);
             $table->string('social_link',45);
             $table->string('address',200);
+            $table->string('image',200)->nullable();
             $table->timestamps();
         });
     }

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name',45)->unique();
             $table->double('price',10,2);
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('company_id');
 
-            $table->foreign('employee_id')
+            $table->foreign('company_id')
                 ->references('id')
-                ->on('employees')
+                ->on('company')
                 ->onDelete('cascade');
                 
             $table->timestamps();

@@ -13,25 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('employees_services', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name',100)->unique();
-            $table->string('last_name',100);
-            $table->string('image',200)->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('service_id');
             $table->timestamps();
 
-                    $table->foreign('user_id')
+            $table->foreign('employee_id')
                     ->references('id')
-                    ->on('users')
+                    ->on('employees')
                     ->onDelete('cascade');
 
-                    $table->foreign('company_id')
+                    $table->foreign('service_id')
                     ->references('id')
-                    ->on('companies')
+                    ->on('services')
                     ->onDelete('cascade');
-        });
+        }
     }
 
     /**
@@ -41,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        //
     }
 };

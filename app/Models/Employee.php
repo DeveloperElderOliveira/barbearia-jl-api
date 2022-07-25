@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
+ * @property string $image
  * @property int $user_id
  * @property int $company_id
  * @property Carbon|null $created_at
@@ -41,7 +42,8 @@ class Employee extends Model
 		'first_name',
 		'last_name',
 		'user_id',
-		'company_id'
+		'company_id',
+		'image'
 	];
 
 	protected $hidden = [

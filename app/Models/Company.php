@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $phone
  * @property string $social_link
  * @property string $address
+ * @property string $image
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -37,7 +38,8 @@ class Company extends Model
 		'longitude',
 		'phone',
 		'social_link',
-		'address'
+		'address',
+		'image'
 	];
 
 	public function employees()
