@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,12 +16,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property float $price
- * @property int $employee_id
+ * @property int $company_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Employee $employee
- * @property Schedule $schedule
+ * @property Company $company
+ * @property Collection|Employee[] $employees
+ *
  * @package App\Models
  */
 class Service extends Model
@@ -29,26 +31,27 @@ class Service extends Model
 
 	protected $casts = [
 		'price' => 'float',
-		'employee_id' => 'int'
+		'company_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
 		'price',
-		'employee_id'
+		'company_id'
 	];
 
-	protected $hidden = [
-		'created_at',
-		'updated_at'
-	];
-
-	public function employee()
+	public function company()
 	{
-		return $this->belongsTo(Employee::class);
+		return $this->belongsTo(Company::class);
 	}
 
-	public function schedule()
+	public function employees()
+	{
+		return $this->belongsToMany(Employee::class, 'employees_services')
+					->withTimestamps();
+	}
+
+	public function schedules()
 	{
 		return $this->hasMany(Schedule::class);
 	}

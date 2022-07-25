@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
- * @property string $image
+ * @property string|null $image
  * @property int $user_id
  * @property int $company_id
  * @property Carbon|null $created_at
@@ -24,8 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property Company $company
  * @property User $user
- * @property Collection|Schedule[] $schedules
  * @property Collection|Service[] $services
+ * @property Collection|Schedule[] $schedules
  *
  * @package App\Models
  */
@@ -41,14 +41,9 @@ class Employee extends Model
 	protected $fillable = [
 		'first_name',
 		'last_name',
+		'image',
 		'user_id',
-		'company_id',
-		'image'
-	];
-
-	protected $hidden = [
-		'created_at',
-		'updated_at'
+		'company_id'
 	];
 
 	public function company()
@@ -61,13 +56,14 @@ class Employee extends Model
 		return $this->belongsTo(User::class);
 	}
 
-	public function schedules()
-	{
-		return $this->hasMany(Schedule::class, 'service_id');
-	}
-
 	public function services()
 	{
-		return $this->hasMany(Service::class);
+		return $this->belongsToMany(Service::class, 'employees_services')
+					->withTimestamps();
+	}
+
+	public function schedules()
+	{
+		return $this->hasMany(Schedule::class, 'employee_id');
 	}
 }

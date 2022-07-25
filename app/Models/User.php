@@ -11,8 +11,10 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     protected $table = 'users';
+	public $timestamps = false;
 
 	protected $casts = [
+		'image' => 'boolean',
 		'activated' => 'int'
 	];
 

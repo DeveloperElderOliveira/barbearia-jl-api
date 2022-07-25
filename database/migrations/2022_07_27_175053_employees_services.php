@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employees_services', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('service_id');
             $table->timestamps();
@@ -39,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('employees_services');
     }
 };
