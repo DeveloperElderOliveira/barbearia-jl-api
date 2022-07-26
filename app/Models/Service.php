@@ -38,7 +38,8 @@ class Service extends Model
 	protected $fillable = [
 		'name',
 		'price',
-		'company_id'
+		'company_id',
+		'description'
 	];
 
 	public function company()

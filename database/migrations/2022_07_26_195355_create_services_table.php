@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name',45)->unique();
             $table->double('price',10,2);
             $table->unsignedBigInteger('company_id');
+            $table->string('description',150);
 
             $table->foreign('company_id')
                 ->references('id')
