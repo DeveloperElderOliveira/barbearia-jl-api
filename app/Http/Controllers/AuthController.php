@@ -92,7 +92,8 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        $user = User::where('id', auth('api')->user()->id)->first();
+        $user = User::with('employees')->where('id', auth('api')->user()->id)->first();
+        
         return response()->json([
             'user' => $user,
             'access_token' => $token,

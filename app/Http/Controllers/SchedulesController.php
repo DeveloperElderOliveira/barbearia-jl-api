@@ -26,7 +26,7 @@ class SchedulesController extends Controller
         $user = auth('api')->user();
         
         if(!$schedules = $this->schedule->with('employee','service')->where('user_id',$user['id'])->orderBy('scheduling_date')->get())
-             return response()->json(['error' => 'schedules not found.'],401);
+             return response()->json(['error' => 'schedules not found.']);
 
         return response()->json($schedules);
     } 
@@ -40,7 +40,7 @@ class SchedulesController extends Controller
     public function store(ScheduleRequest $request)
     {
         if(!$schedule = $this->schedule->create($request->all()))
-            return response()->json(['error' => 'schedule not created'],401);
+            return response()->json(['error' => 'schedule not created']);
 
         return response()->json(['schedule' => $schedule]);
     }
@@ -54,7 +54,7 @@ class SchedulesController extends Controller
     public function show($id)
     {
         if(!$schedule = $this->schedule->find($id))
-             return response()->json(['error' => 'schedule not found.'],401);
+             return response()->json(['error' => 'schedule not found.']);
 
         return response()->json(['schedule' => $schedule]);
     }
@@ -69,7 +69,7 @@ class SchedulesController extends Controller
     public function update(ScheduleRequest $request, $id)
     {
         if(!$schedule = $this->schedule->find($id))
-            return response()->json(['error' => 'update not possible'],401);
+            return response()->json(['error' => 'update not possible']);
 
         $schedule = $schedule->update($request->all());
         return response()->json(['schedule' => $schedule]);
@@ -84,7 +84,7 @@ class SchedulesController extends Controller
     public function destroy($id)
     {
         if(!$schedule = $this->schedule->find($id))
-            return response()->json(['error' => 'delete not possible'],401);
+            return response()->json(['error' => 'delete not possible']);
 
         $schedule = $schedule->delete();
         return response()->json(['schedule' => $schedule]);

@@ -21,6 +21,8 @@ Route::group(['middleware' => 'api'], function($router){
         return response()->json(['message'=>'Api barbearia JL','status' => 'Connected']);
     });
     
+    Route::resource('schedules',SchedulesController::class)->except('create','edit');
+
     //Auth
     Route::post('login', [AuthController::class,'login']);
     Route::post('register', [AuthController::class,'register']);
@@ -29,6 +31,6 @@ Route::group(['middleware' => 'api'], function($router){
     Route::post('me', [AuthController::class,'me']);
     
     Route::resource('companies',CompaniesController::class)->except('create','edit');
-    Route::resource('schedules',SchedulesController::class)->except('create','edit');
+    
 
 });
