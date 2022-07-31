@@ -17,19 +17,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property float $price
  * @property int $company_id
+ * @property string $description
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Company $company
  * @property Collection|Employee[] $employees
+ * @property Collection|Schedule[] $schedules
  *
  * @package App\Models
  */
 class Service extends Model
 {
 	protected $table = 'services';
-	public $timestamps = false;
-	
+
 	protected $casts = [
 		'price' => 'float',
 		'company_id' => 'int'
@@ -49,11 +50,13 @@ class Service extends Model
 
 	public function employees()
 	{
-		return $this->belongsToMany(Employee::class, 'employees_services');
+		return $this->belongsToMany(Employee::class, 'employees_services')
+					->withTimestamps();
 	}
 
 	public function schedules()
 	{
-		return $this->hasMany(Schedule::class);
+		return $this->belongsToMany(Schedule::class, 'services_schedules')
+					->withTimestamps();
 	}
 }

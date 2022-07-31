@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamp('scheduling_date');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('employee_id')->nullable();
-            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('employee_id');
+            // $table->unsignedBigInteger('service_id');
+            $table->string("observacao",200);
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -31,10 +32,10 @@ return new class extends Migration
                 ->on('employees')
                 ->onDelete('cascade');
 
-            $table->foreign('service_id')
-                ->references('id')
-                ->on('services')
-                ->onDelete('cascade');
+            // $table->foreign('service_id')
+            //     ->references('id')
+            //     ->on('services')
+            //     ->onDelete('cascade');
                 
         });
     }

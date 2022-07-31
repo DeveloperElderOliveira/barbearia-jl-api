@@ -32,7 +32,6 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
 	protected $table = 'employees';
-	public $timestamps = false;
 
 	protected $casts = [
 		'user_id' => 'int',
@@ -59,7 +58,8 @@ class Employee extends Model
 
 	public function services()
 	{
-		return $this->belongsToMany(Service::class, 'employees_services');
+		return $this->belongsToMany(Service::class, 'employees_services')
+					->withTimestamps();
 	}
 
 	public function schedules()

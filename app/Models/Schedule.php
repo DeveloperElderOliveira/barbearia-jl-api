@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,25 +16,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property Carbon $scheduling_date
  * @property int $user_id
- * @property int|null $employee_id
- * @property int $service_id
+ * @property int $employee_id
+ * @property string $observacao
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Employee $employee
  * @property User $user
+ * @property Collection|Service[] $services
  *
  * @package App\Models
  */
 class Schedule extends Model
 {
 	protected $table = 'schedules';
-	public $timestamps = false;
-	
+
 	protected $casts = [
 		'user_id' => 'int',
-		'employee_id' => 'int',
-		'service_id' => 'int'
+		'employee_id' => 'int'
 	];
 
 	protected $dates = [
@@ -44,17 +44,12 @@ class Schedule extends Model
 		'scheduling_date',
 		'user_id',
 		'employee_id',
-		'service_id'
+		'observacao'
 	];
 
 	public function employee()
 	{
-		return $this->belongsTo(Employee::class, 'service_id');
-	}
-
-	public function service()
-	{
-		return $this->belongsTo(Service::class);
+		return $this->belongsTo(Employee::class);
 	}
 
 	public function user()
@@ -62,4 +57,9 @@ class Schedule extends Model
 		return $this->belongsTo(User::class);
 	}
 
+	public function services()
+	{
+		return $this->belongsToMany(Service::class, 'services_schedules')
+					->withTimestamps();
+	}
 }

@@ -13,23 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees_services', function (Blueprint $table) {
-            $table->unsignedBigInteger('employee_id');
+        Schema::create('services_schedules', function (Blueprint $table) {
             $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('schedule_id');
             $table->timestamps();
-
-            $table->foreign('employee_id')
-                    ->references('id')
-                    ->on('employees')
-                    ->onDelete('cascade');
 
             $table->foreign('service_id')
                     ->references('id')
                     ->on('services')
                     ->onDelete('cascade');
+
+            $table->foreign('schedule_id')
+                    ->references('id')
+                    ->on('schedules')
+                    ->onDelete('cascade');
         });
     }
-    
 
     /**
      * Reverse the migrations.
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees_services');
+        Schema::dropIfExists('services_schedules');
     }
 };
