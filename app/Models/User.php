@@ -1,39 +1,20 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-/**
- * Class User
- * 
- * @property int $id
- * @property string $name
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property int $activated
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $image
- * 
- * @property Collection|Employee[] $employees
- * @property Collection|Schedule[] $schedules
- *
- * @package App\Models
- */
-class User extends Model
+class User extends Authenticatable implements JWTSubject
 {
-	protected $table = 'users';
+    use Notifiable;
+
+    protected $table = 'users';
+	public $timestamps = false;
 
 	protected $casts = [
+		'image' => 'boolean',
 		'activated' => 'int'
 	];
 
@@ -43,7 +24,10 @@ class User extends Model
 
 	protected $hidden = [
 		'password',
-		'remember_token'
+		'remember_token',
+		'email_verified_at',
+		'created_at',
+		'updated_at'
 	];
 
 	protected $fillable = [
@@ -52,11 +36,11 @@ class User extends Model
 		'email_verified_at',
 		'password',
 		'activated',
-		'remember_token',
-		'image'
+		'image',
+		'remember_token'
 	];
-
-	public function employees()
+    
+    public function employees()
 	{
 		return $this->hasMany(Employee::class);
 	}
@@ -65,4 +49,16 @@ class User extends Model
 	{
 		return $this->hasMany(Schedule::class);
 	}
+    
+    //JWT
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
