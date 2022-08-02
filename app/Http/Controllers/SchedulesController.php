@@ -40,11 +40,11 @@ class SchedulesController extends Controller
     public function store(ScheduleRequest $request)
     {
         $dados = $request->all();
-        dd($dados);
-        if(!$schedule = $this->schedule->create($request->all()))
-            return response()->json(['error' => 'schedule not created']);
+        // dd($dados['servicos']);
+        // if(!$schedule = $this->schedule->create($request->all()))
+        //     return response()->json(['error' => 'schedule not created']);
 
-        return response()->json(['schedule' => $schedule]);
+        return response()->json(['schedule' => $dados['servicos']]);
     }
 
     /**
