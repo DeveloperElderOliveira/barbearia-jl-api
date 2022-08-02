@@ -27,8 +27,12 @@ class ScheduleRequest extends FormRequest
             'scheduling_date' => 'required',
             'user_id' => 'required',
 		    'employee_id' => 'required',
-		    'service_id' => 'required'
-        ];
+            'confirmado' => 'required',
+            'observacao' => 'required',
+            'horario' => 'required',
+            'servicos' => 'required'
+
+        ]; 
     }
 
     /**
@@ -42,7 +46,10 @@ class ScheduleRequest extends FormRequest
             'scheduling_date.required' => 'Data e Hora do agendamento deve ser preenchido.',
             'user_id.required' => 'Cliente deve ser preenchido.',
 		    'employee_id.required' => 'Funcionário deve ser preenchido.',
-		    'service_id.required' => 'Serviço deve ser preenchido.',
+            'confirmado.required' => 'Confirmado deve ser preenchido.',
+            'observacao.required' => 'Observação deve ser preenchido.',
+            'horario.required' => 'Horário deve ser preenchido.',
+            'servicos.required' => 'Serviços deve ser preenchido.',
         ];
     }
 }
