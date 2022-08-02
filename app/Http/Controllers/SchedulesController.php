@@ -47,7 +47,7 @@ class SchedulesController extends Controller
 
         foreach($dados['servicos'] as $servico) {
             $ser = $servico;
-            $schedule->services()->create(["service_id" => $servico->id]);
+            $schedule->services()->create(["service_id" => $servico['id']]);
         }
 
         // if(!$services_schedule = $schedule->services()->create($dados['servicos']))
