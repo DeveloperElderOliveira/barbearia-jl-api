@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
+use App\Models\ServicesSchedule;
 use Illuminate\Http\Request;
 
 class SchedulesController extends Controller
@@ -47,13 +48,13 @@ class SchedulesController extends Controller
 
         foreach($dados['servicos'] as $servico) {
             $ser = $servico;
-            $schedule->services()->create(["service_id" => $servico['id']]);
+            $service_id = ServicesSchedule::create(["service_id" => $servico['id'], "schedule_id" => $schedule->id]);
         }
 
         // if(!$services_schedule = $schedule->services()->create($dados['servicos']))
         //     return response()->json(['error' => 'services schedules not created']);
 
-        return response()->json(['schedule' => $ser]);
+        return response()->json(['schedule' => $service_id]);
     }
 
     /**
