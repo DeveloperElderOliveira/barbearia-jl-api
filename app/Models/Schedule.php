@@ -17,12 +17,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $scheduling_date
  * @property int $user_id
  * @property int $employee_id
+ * @property int $confirmado
  * @property string $observacao
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Employee $employee
  * @property User $user
+ * @property AgendamentoDiaHorario $agendamento_dia_horario
  * @property Collection|Service[] $services
  *
  * @package App\Models
@@ -33,7 +35,8 @@ class Schedule extends Model
 
 	protected $casts = [
 		'user_id' => 'int',
-		'employee_id' => 'int'
+		'employee_id' => 'int',
+		'confirmado' => 'int'
 	];
 
 	protected $dates = [
@@ -44,6 +47,7 @@ class Schedule extends Model
 		'scheduling_date',
 		'user_id',
 		'employee_id',
+		'confirmado',
 		'observacao'
 	];
 
@@ -55,6 +59,11 @@ class Schedule extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class);
+	}
+
+	public function agendamento_dia_horario()
+	{
+		return $this->hasOne(AgendamentoDiaHorario::class);
 	}
 
 	public function services()
