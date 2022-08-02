@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
 use App\Models\ServicesSchedule;
+use Exception;
 use Illuminate\Http\Request;
 
 class SchedulesController extends Controller
@@ -40,17 +41,22 @@ class SchedulesController extends Controller
      */
     public function store(ScheduleRequest $request)
     {
-        $dados = $request->all();
+        try{
+            $dados = $request->all();
         
-        $schedule = $this->schedule->create($request->all());
+            $schedule = $this->schedule->create($request->all());
 
-        $agend = $schedule->agendamento_dia_horario()->create(["dia" => $dados['scheduling_date'],"horario" => $dados['horario']]);
+            $schedule->agendamento_dia_horario()->create(["dia" => $dados['scheduling_date'],"horario" => $dados['horario']]);
 
-        // foreach($dados['servicos'] as $servico) {
-        //     $service_id = ServicesSchedule::create(["service_id" => $servico['id'], "schedule_id" => $schedule->id]);
-        // }
+            foreach($dados['servicos'] as $servico) {
+                ServicesSchedule::create(["service_id" => $servico['id'], "schedule_id" => $schedule->id]);
+            }
 
-        return response()->json(['schedule' => $agend]);
+            return response()->json(['schedule' => $schedule]);
+        }catch (Exception $e){
+            return response()->json(['error' => $e->getMessage()],404);
+        }
+        
     }
 
     /**
