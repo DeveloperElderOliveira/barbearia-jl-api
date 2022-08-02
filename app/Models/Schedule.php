@@ -64,6 +64,7 @@ class Schedule extends Model
 	public function agendamento_dia_horario()
 	{
 		return $this->hasOne(AgendamentoDiaHorario::class);
+		
 	}
 
 	public function services()
