@@ -41,20 +41,16 @@ class SchedulesController extends Controller
     public function store(ScheduleRequest $request)
     {
         $dados = $request->all();
-        $ser = '';
-        // // dd($dados['servicos']);
-        if(!$schedule = $this->schedule->create($request->all()))
-            return response()->json(['error' => 'schedule not created']);
+        
+        $schedule = $this->schedule->create($request->all());
 
-        foreach($dados['servicos'] as $servico) {
-            $ser = $servico;
-            $service_id = ServicesSchedule::create(["service_id" => $servico['id'], "schedule_id" => $schedule->id]);
-        }
+        $agend = $schedule->agendamento_dia_horario()->create(["dia" => $dados['scheduling_date'],"horario" => $dados['horario']]);
 
-        // if(!$services_schedule = $schedule->services()->create($dados['servicos']))
-        //     return response()->json(['error' => 'services schedules not created']);
+        // foreach($dados['servicos'] as $servico) {
+        //     $service_id = ServicesSchedule::create(["service_id" => $servico['id'], "schedule_id" => $schedule->id]);
+        // }
 
-        return response()->json(['schedule' => $service_id]);
+        return response()->json(['schedule' => $agend]);
     }
 
     /**
