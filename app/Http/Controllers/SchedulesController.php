@@ -47,7 +47,7 @@ class SchedulesController extends Controller
         // if(!$services_schedule = $schedule->services()->create($dados['servicos']))
         //     return response()->json(['error' => 'services schedules not created']);
 
-        return response()->json(['schedule' => $dados['servicos'][0]]);
+        return response()->json(['schedule' => $dados['servicos'][0]->name]);
     }
 
     /**
