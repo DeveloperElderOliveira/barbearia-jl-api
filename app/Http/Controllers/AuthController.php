@@ -24,7 +24,7 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['numero_celular', 'password']);
         // dd($credentials);
 
         if (! $token = Auth::guard('api')->attempt($credentials)) {
@@ -36,12 +36,12 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('email',$request->numero_celular)->first();
         if (!$user){
             $user = new User();
             $user->name = $request->name;
             $user->password = bcrypt($request->password);
-            $user->email = $request->email;
+            $user->numero_celular = $request->numero_celular;
             $user->activated = 1;
             $user->save();
 
