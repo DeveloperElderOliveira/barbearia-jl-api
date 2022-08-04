@@ -32,8 +32,9 @@ class SchedulesController extends Controller
              return response()->json(['error' => 'schedules not found.']);
 
              foreach($schedules as $schedule){
-                    dd($schedule->services);
-                // $valor_total_agendamento += $schedule->service['price'];
+                    foreach($schedule->services as $service){
+                        $valor_total_agendamento += $service['price'];
+                    }             
              }
 
         return response()->json($schedules);
