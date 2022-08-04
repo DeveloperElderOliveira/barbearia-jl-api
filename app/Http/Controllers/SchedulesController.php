@@ -51,15 +51,27 @@ class SchedulesController extends Controller
     
     public function loadHorarios($dia)
     {
-        $horarios_disponíveis = ["08:00 - 09:00","09:00 - 10:00","10:00 - 11:00",
-        "12:00 - 13:00","13:00 - 14:00","14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00",
-         "17:00 - 18:00","18:00 - 19:00","18:00 - 19:00"];
+        $escala_horarios_disponiveis = ["08:00 - 09:00",
+        "09:00 - 10:00","10:00 - 11:00",
+        "11:00 - 12:00","12:00 - 13:00",
+        "13:00 - 14:00","14:00 - 15:00", 
+        "15:00 - 16:00","16:00 - 17:00",
+        "17:00 - 18:00","18:00 - 19:00",
+        "19:00 - 20:00","20:00 - 21:00"];
 
-         dd($horarios_disponíveis);
-         
-        $horarios = AgendamentoDiaHorario::where('dia',$dia)->get();
+        $horarios_agendados = AgendamentoDiaHorario::where('dia',$dia)->get();
 
-        return response()->json($horarios);
+        foreach($escala_horarios_disponiveis as $horario_disp)
+        {
+            foreach($horarios_agendados as $hora_agendada){
+                if($horario_disp == $hora_agendada->dia)
+                {
+                    unset($escala_horarios_disponiveis[array_search($horario_disp,$escala_horarios_disponiveis)]);
+                }
+            }
+        }
+
+        return response()->json($escala_horarios_disponiveis);
     }
 
     /**
