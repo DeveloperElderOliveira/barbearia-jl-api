@@ -35,7 +35,7 @@ class SchedulesController extends Controller
                     foreach($schedule->services as $service){
                         $valor_total_agendamento += $service['price'];
                     }
-                    $schedules->valor_total_agendamento = $valor_total_agendamento;
+                    $schedule->valor_total_agendamento = $valor_total_agendamento;
                     $valor_total_agendamento = 0;        
              }
              dd($schedules);
