@@ -64,7 +64,7 @@ class SchedulesController extends Controller
         foreach($escala_horarios_disponiveis as $horario_disp)
         {
             foreach($horarios_agendados as $hora_agendada){
-                if($horario_disp == $hora_agendada->dia)
+                if($horario_disp == $hora_agendada->horario)
                 {
                     unset($escala_horarios_disponiveis[array_search($horario_disp,$escala_horarios_disponiveis)]);
                 }
