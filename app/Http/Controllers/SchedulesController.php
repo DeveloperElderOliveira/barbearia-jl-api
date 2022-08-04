@@ -52,7 +52,7 @@ class SchedulesController extends Controller
     public function loadHorarios($dia)
     {   
         $escala_horarios_disponiveis = [
-        " ","08:00 - 09:00",
+        "Escolha um horário","08:00 - 09:00",
         "09:00 - 10:00","10:00 - 11:00",
         "11:00 - 12:00","12:00 - 13:00",
         "13:00 - 14:00","14:00 - 15:00", 
@@ -65,7 +65,6 @@ class SchedulesController extends Controller
         foreach($horarios_agendados as $hora_agendada){
             $pos = array_search($hora_agendada->horario,$escala_horarios_disponiveis);
             if($pos != false){
-                // $disp[] = pos;
                 unset($escala_horarios_disponiveis[$pos]);
             }
                
