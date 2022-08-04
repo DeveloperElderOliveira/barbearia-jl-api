@@ -62,13 +62,13 @@ class SchedulesController extends Controller
 
         $horarios_agendados = AgendamentoDiaHorario::where('dia',$dia)->get();
         
-        foreach($horarios_agendados as $hora_agendada){
-            $pos = array_search($hora_agendada->horario,$escala_horarios_disponiveis);
-            if($pos != false || $pos == 0){
-                unset($escala_horarios_disponiveis[$pos]);  
-            }
+        // foreach($horarios_agendados as $hora_agendada){
+        //     $pos = array_search($hora_agendada->horario,$escala_horarios_disponiveis);
+        //     if($pos != false || $pos == 0){
+        //         unset($escala_horarios_disponiveis[$pos]);  
+        //     }
                
-        }
+        // }
 
         return response()->json($escala_horarios_disponiveis);
     }
