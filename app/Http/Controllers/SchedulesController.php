@@ -66,10 +66,9 @@ class SchedulesController extends Controller
         
         foreach($horarios_agendados as $hora_agendada){
             $pos = array_search($hora_agendada->horario,$escala_horarios_disponiveis);
-            dd($pos);
-                // if( $pos != false || $pos == 0) {
-                //     $horarios_disponiveis[] = $hora_agendada->horario;
-                // }
+                if( $pos != false || $pos == 0) {
+                    $horarios_disponiveis[] = $hora_agendada->horario;
+                }
             // foreach($escala_horarios_disponiveis as $horario_disp)
             // {       
             //         if($horario_disp != $hora_agendada->horario)
@@ -78,6 +77,7 @@ class SchedulesController extends Controller
             //         }
             // }
         }
+        dd($horarios_disponiveis);
 
         return response()->json($horarios_disponiveis);
     }
