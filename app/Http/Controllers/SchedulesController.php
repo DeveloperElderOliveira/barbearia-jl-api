@@ -41,6 +41,8 @@ class SchedulesController extends Controller
                         }                     
                     }
                     $schedule->valor_total_agendamento = $valor_total_agendamento;
+                    $schedule->concat_nome_servicos = $concat_nome_servicos;
+                    $concat_nome_servicos = '';
                     $valor_total_agendamento = 0;        
              }
              dd($schedules);
