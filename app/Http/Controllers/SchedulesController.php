@@ -45,7 +45,6 @@ class SchedulesController extends Controller
                     $concat_nome_servicos = '';
                     $valor_total_agendamento = 0;        
              }
-             dd($schedules);
         return response()->json($schedules);
     } 
 
