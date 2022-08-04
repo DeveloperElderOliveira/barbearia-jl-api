@@ -33,10 +33,10 @@ class SchedulesController extends Controller
              return response()->json(['error' => 'schedules not found.']);
 
              foreach($schedules as $schedule){
-                    for($i = 1; $i <= count($schedule->services); $i++){
+                    for($i = 0; $i < count($schedule->services); $i++){
                         $valor_total_agendamento += $schedule->services[$i]['price'];
                         $concat_nome_servicos .= $schedule->services[$i]['name'];
-                        if( count($schedule->services) > $i ){
+                        if( count($schedule->services) > ($i + 1) ){
                             $concat_nome_servicos .= ' + ';
                         }                     
                     }
