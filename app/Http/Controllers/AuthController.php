@@ -47,7 +47,7 @@ class AuthController extends Controller
 
             return response()->json(['message' => 'user created successfully', 'user' => $user]);
         }else{
-            return response()->json(['message' => 'Error, user exists.'],404);
+            return response()->json(['message' => 'Erro, Telefone já cadastrado.'],404);
         }
     }
 
