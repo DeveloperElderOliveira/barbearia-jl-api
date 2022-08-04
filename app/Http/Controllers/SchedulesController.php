@@ -36,7 +36,7 @@ class SchedulesController extends Controller
                         $valor_total_agendamento += $service['price'];
                     }             
              }
-
+             dd($valor_total_agendamento);
         return response()->json($schedules);
     } 
 
