@@ -37,7 +37,7 @@ class SchedulesController extends Controller
                         $valor_total_agendamento += $schedule->services[$i]['price'];
                         $concat_nome_servicos += $schedule->services[$i]['name'];
                         if( count($schedule->services) > $i ){
-                            $concat_nome_servicos += ' + ';
+                            $concat_nome_servicos .= ' + ';
                         }                     
                     }
                     $schedule->valor_total_agendamento = $valor_total_agendamento;
