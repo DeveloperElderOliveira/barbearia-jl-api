@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'api'], function($router){
 
+
+Route::group(['middleware' => 'api'], function($router){
+    
     Route::get('/', function () {
         return response()->json(['message'=>'Api barbearia JL','status' => 'Connected']);
     });
     
     Route::resource('schedules',SchedulesController::class)->except('create','edit');
-
+    Route::get('loadHorarios/{dia}',[SchedulesController::class,'loadHorarios']);
+    
     //Auth
     Route::post('login', [AuthController::class,'login']);
     Route::post('register', [AuthController::class,'register']);

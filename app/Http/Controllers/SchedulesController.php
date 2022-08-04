@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ScheduleRequest;
+use App\Models\AgendamentoDiaHorario;
 use App\Models\Schedule;
 use App\Models\ServicesSchedule;
 use Exception;
@@ -14,7 +15,7 @@ class SchedulesController extends Controller
 
     public function __construct(Schedule $schedule)
     {
-        $this->middleware('auth:api');
+        // $this->middleware('auth:api');
         $this->schedule = $schedule;
     }
 
@@ -46,7 +47,14 @@ class SchedulesController extends Controller
                     $valor_total_agendamento = 0;        
              }
         return response()->json($schedules);
-    } 
+    }
+    
+    public function loadHorarios($dia)
+    {
+        $horarios = AgendamentoDiaHorario::where('dia',$dia)->get();
+
+        return response()->json($horarios);
+    }
 
     /**
      * Store a newly created resource in storage.
