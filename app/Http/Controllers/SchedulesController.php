@@ -59,28 +59,14 @@ class SchedulesController extends Controller
         "17:00 - 18:00","18:00 - 19:00",
         "19:00 - 20:00","20:00 - 21:00"];
 
-        $horarios_disponiveis = [];
-
         $horarios_agendados = AgendamentoDiaHorario::where('dia',$dia)->get();
-        // unset($escala_horarios_disponiveis[array_search($horarios_agendados[0]->horario,$escala_horarios_disponiveis)]);
         
         foreach($horarios_agendados as $hora_agendada){
             $pos = array_search($hora_agendada->horario,$escala_horarios_disponiveis);
-                // if( $pos != false || $pos == 0) {
-                //     $horarios_disponiveis[] = $hora_agendada->horario;
-                // }
-                unset($escala_horarios_disponiveis[$pos]);
-            // foreach($escala_horarios_disponiveis as $horario_disp)
-            // {       
-            //         if($horario_disp != $hora_agendada->horario)
-            //         {
-            //             $horarios_disponiveis[] = $horario_disp;
-            //         }
-            // }
+            unset($escala_horarios_disponiveis[$pos]);     
         }
-        dd($escala_horarios_disponiveis);
 
-        return response()->json($horarios_disponiveis);
+        return response()->json($escala_horarios_disponiveis);
     }
 
     /**
