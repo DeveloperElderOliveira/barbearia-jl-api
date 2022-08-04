@@ -65,7 +65,8 @@ class SchedulesController extends Controller
         foreach($horarios_agendados as $hora_agendada){
             $pos = array_search($hora_agendada->horario,$escala_horarios_disponiveis);
             if($pos != false){
-                $disp[] = $hora_agendada->horario;
+                $disp[] = pos;
+                unset($escala_horarios_disponiveis[$pos]);
             }
                
         }
