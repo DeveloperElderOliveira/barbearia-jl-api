@@ -25,15 +25,20 @@ class SchedulesController extends Controller
      */
     public function index()
     {    
-        $valor_total_agendamento = 0;   
+        $valor_total_agendamento = 0;
+        $concat_nome_servicos = '';   
         $user = auth('api')->user();
         
         if(!$schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->orderBy('scheduling_date')->get())
              return response()->json(['error' => 'schedules not found.']);
 
              foreach($schedules as $schedule){
-                    foreach($schedule->services as $service){
-                        $valor_total_agendamento += $service['price'];
+                    for($i = 1; $i <= count($schedule->services); $i++){
+                        $valor_total_agendamento += $schedule->services[$i]['price'];
+                        $concat_nome_servicos += $schedule->services[$i]['name'];
+                        if( count($schedule->services) > $i ){
+                            $concat_nome_servicos += ' + ';
+                        }                     
                     }
                     $schedule->valor_total_agendamento = $valor_total_agendamento;
                     $valor_total_agendamento = 0;        
