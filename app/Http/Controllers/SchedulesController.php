@@ -70,7 +70,7 @@ class SchedulesController extends Controller
                
         }
 
-        return response()->json($escala_horarios_disponiveis);
+        return response()->json($disp);
     }
 
     /**
