@@ -24,13 +24,17 @@ class SchedulesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {       
+    {    
+        $valor_total_agendamento = 0;   
         $user = auth('api')->user();
         
         if(!$schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->orderBy('scheduling_date')->get())
              return response()->json(['error' => 'schedules not found.']);
 
-             dd($schedules);
+             foreach($schedules as $schedule){
+                    dd($schedule->services);
+                // $valor_total_agendamento += $schedule->service['price'];
+             }
 
         return response()->json($schedules);
     } 
