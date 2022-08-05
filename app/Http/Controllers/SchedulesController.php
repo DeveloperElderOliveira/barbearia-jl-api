@@ -94,6 +94,9 @@ class SchedulesController extends Controller
         
             $schedule = $this->schedule->create($request->all());
 
+            if ($agendado = AgendamentoDiaHorario::where("dia",$dados['scheduling_date'])->where("horario", $dados['horario'])->first()){
+                throw new Exception("Horário indisponível",404);
+            }
             $schedule->agendamento_dia_horario()->create(["dia" => $dados['scheduling_date'],"horario" => $dados['horario']]);
 
             foreach($dados['servicos'] as $servico) {
