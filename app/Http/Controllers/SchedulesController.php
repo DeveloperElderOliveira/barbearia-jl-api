@@ -31,6 +31,7 @@ class SchedulesController extends Controller
         $current_date = Carbon::now();
         $current_date = Carbon::parse($current_date)->addMonths(24)->format('Y-m-d');
         $current_date .= " 00:00:00";
+        dd($current_date);
 
         $valor_total_agendamento = 0;
         $concat_nome_servicos = '';   
