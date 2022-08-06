@@ -7,6 +7,7 @@ use App\Models\AgendamentoDiaHorario;
 use App\Models\Schedule;
 use App\Models\User;
 use App\Models\ServicesSchedule;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,9 @@ class SchedulesController extends Controller
      */
     public function index()
     {    
+        $current_date = Carbon::now();
+        $current_date = Carbon::parse($current_date)->addMonths(24)->format('d-m-Y H:i:s');
+        dd($current_date);
         $valor_total_agendamento = 0;
         $concat_nome_servicos = '';   
         $user = auth('api')->user();
