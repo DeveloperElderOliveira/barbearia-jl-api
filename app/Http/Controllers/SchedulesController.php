@@ -29,8 +29,8 @@ class SchedulesController extends Controller
     public function index()
     {    
         $current_date = Carbon::now();
-        $current_date = Carbon::parse($current_date)->addMonths(24)->format('d-m-Y H:i:s');
-        dd($current_date);
+        $current_date = Carbon::parse($current_date)->addMonths(24)->format('d-m-Y');
+        dd($current_date . " 00:00:00");
         $valor_total_agendamento = 0;
         $concat_nome_servicos = '';   
         $user = auth('api')->user();
