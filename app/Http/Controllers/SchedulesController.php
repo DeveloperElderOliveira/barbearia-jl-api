@@ -29,7 +29,7 @@ class SchedulesController extends Controller
     public function index()
     {    
         $current_date = Carbon::now();
-        $current_date = Carbon::parse($current_date)->addMonths(24)->format('d-m-Y');
+        $current_date = Carbon::parse($current_date)->addMonths(24)->format('Y-m-d');
         $current_date .= " 00:00:00";
 
         $valor_total_agendamento = 0;
