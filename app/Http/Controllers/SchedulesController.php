@@ -30,16 +30,17 @@ class SchedulesController extends Controller
     {    
         $current_date = Carbon::now();
         $current_date = Carbon::parse($current_date)->addMonths(24)->format('d-m-Y');
-        dd($current_date . " 00:00:00");
+        $current_date .= " 00:00:00";
+
         $valor_total_agendamento = 0;
         $concat_nome_servicos = '';   
         $user = auth('api')->user();
         $user_employ = User::with('employees')->where('id', auth('api')->user()->id)->first();
         
         if ($user_employ->name == "adm-jorge" && $user_employ->id == 4 && $user_employ->employees[0]->id == 14 && $user_employ->employees[0]->first_name == "JORGE"){
-            $schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('employee_id',$user_employ->employees[0]->id)->orderBy('scheduling_date')->get();
+            $schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('employee_id',$user_employ->employees[0]->id)->whereDate('scheduling_date',$current_date)->orderBy('scheduling_date')->get();
         }else{
-            $schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->orderBy('scheduling_date')->get();
+            $schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->whereDate('scheduling_date',$current_date)->orderBy('scheduling_date')->get();
         }
 
         if(!$schedules)
