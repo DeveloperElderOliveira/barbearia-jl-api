@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\AgendamentoDiaHorario;
 use App\Models\Schedule;
+use App\Models\User;
 use App\Models\ServicesSchedule;
 use Exception;
 use Illuminate\Http\Request;
@@ -29,7 +30,11 @@ class SchedulesController extends Controller
         $valor_total_agendamento = 0;
         $concat_nome_servicos = '';   
         $user = auth('api')->user();
+        $user_employ = User::with('employees')->where('id', auth('api')->user()->id)->first();
         
+        if ($user_employ->name == "adm-jorge" && $user_employ->id == 4){
+            dd($user_employ);
+        }        
         if(!$schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->orderBy('scheduling_date')->get())
              return response()->json(['error' => 'schedules not found.']);
 
