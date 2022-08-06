@@ -33,9 +33,12 @@ class SchedulesController extends Controller
         $user_employ = User::with('employees')->where('id', auth('api')->user()->id)->first();
         
         if ($user_employ->name == "adm-jorge" && $user_employ->id == 4 && $user_employ->employees[0]->id == 14 && $user_employ->employees[0]->first_name == "JORGE"){
-            dd('batendo');
-        }        
-        if(!$schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->orderBy('scheduling_date')->get())
+            $schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('employee_id',$user_employ->id)->orderBy('scheduling_date')->get();
+        }else{
+            $schedules = $this->schedule->with('employee','user','services','agendamento_dia_horario')->where('user_id',$user['id'])->orderBy('scheduling_date')->get();
+        }
+
+        if(!$schedules)
              return response()->json(['error' => 'schedules not found.']);
 
              foreach($schedules as $schedule){
