@@ -154,6 +154,11 @@ class SchedulesController extends Controller
         return response()->json(['schedule' => $schedule]);
     }
 
+    public function confirmarAgendamento(Request $request)
+    {
+        return response()->json([$request->all()]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
