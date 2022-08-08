@@ -160,9 +160,9 @@ class SchedulesController extends Controller
         if(!$schedule = $this->schedule->find($id))
             return response()->json(['error' => 'Não foi possível confirmar agendamento.']);
 
-        $schedule = $schedule->update(['confirmado' => 1]);
+        $result = $schedule->update(['confirmado' => 1]);
 
-        return response()->json(['schedule' => $schedule]);
+        return response()->json([$result]);
     }
 
     /**
