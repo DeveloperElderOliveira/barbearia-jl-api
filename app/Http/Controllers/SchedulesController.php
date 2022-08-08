@@ -156,11 +156,13 @@ class SchedulesController extends Controller
 
     public function confirmarAgendamento(Request $request)
     {   
-        $dados = $request->all()['scheduling_id'];
-        // if(!$schedule = $this->schedule->find($request))
-        //     return response()->json(['error' => 'update not possible']);
+        $id = $request->all()['scheduling_id'];
+        if(!$schedule = $this->schedule->find($id))
+            return response()->json(['error' => 'Não foi possível confirmar agendamento.']);
 
-        return response()->json([$dados]);
+        $schedule = $schedule->update(['confirmado' => 1]);
+
+        return response()->json(['schedule' => $schedule]);
     }
 
     /**
