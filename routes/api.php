@@ -26,6 +26,7 @@ Route::group(['middleware' => 'api'], function($router){
     Route::resource('schedules',SchedulesController::class)->except('create','edit');
     Route::get('loadHorarios/{dia}',[SchedulesController::class,'loadHorarios']);
     Route::post('confirmarAgendamento',[SchedulesController::class,'confirmarAgendamento']);
+    Route::post('cancelarAgendamento',[SchedulesController::class,'cancelarAgendamento']);
     
     //Auth
     Route::post('login', [AuthController::class,'login']);

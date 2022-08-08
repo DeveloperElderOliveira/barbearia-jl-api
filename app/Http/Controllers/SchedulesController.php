@@ -165,6 +165,17 @@ class SchedulesController extends Controller
         return response()->json($result);
     }
 
+    public function cancelarAgendamento(Request $request)
+    {   
+        $id = $request->all()['scheduling_id'];
+        if(!$schedule = $this->schedule->find($id))
+            return response()->json(['error' => 'Não foi possível cancelar o agendamento.']);
+
+        $result = $schedule->update(['confirmado' => 2]);
+
+        return response()->json($result);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
