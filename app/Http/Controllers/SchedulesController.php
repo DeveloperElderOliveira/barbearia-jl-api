@@ -155,8 +155,12 @@ class SchedulesController extends Controller
     }
 
     public function confirmarAgendamento(Request $request)
-    {
-        return response()->json([$request->all()]);
+    {   
+        $dados = $request->all()['scheduling_id'];
+        // if(!$schedule = $this->schedule->find($request))
+        //     return response()->json(['error' => 'update not possible']);
+
+        return response()->json([$dados]);
     }
 
     /**
