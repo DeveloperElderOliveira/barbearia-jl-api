@@ -162,7 +162,7 @@ class SchedulesController extends Controller
 
         $result = $schedule->update(['confirmado' => 1]);
 
-        return response()->json([$result]);
+        return response()->json($result);
     }
 
     /**
